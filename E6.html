@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style.css">
+    <style>
+        .valid{
+            color: green;
+        }
+        .invalid{
+            color: red;
+        }
+
+        .error{
+            border : 1px red solid;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="tittle">Add new Product</div>
+            <div class="triangle-right"></div>
+        </div>
+        <div class="main">
+            <div class="left">
+                <input type="text" id="code" name="code" placeholder="Code">
+                <span id="mess-code"></span>
+                <input type="text" id="name" name="name" placeholder="Name">
+                <span id="mess-name"></span>
+                <input type="text" name="cost" id="cost" placeholder="Cost(giá nhập)">
+                <span id="mess-cost"></span>
+                <input type="text" name="price" id="price" placeholder="Price(giá bán)">
+                <span id="mess-price"></span>
+            </div>
+            <div class="right">
+                <input type="text" id="des" name="Description" placeholder="Description">
+                <span id="mess-des"></span>
+                <button id="btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $ = function(_id){
+            return document.getElementById(_id);
+        }
+        var btn = $("btn");
+        let check_name = /^[A-Z ]+$/;
+        let check_code = /^(NE|SE|ME)[0-9]{4,6}$/;
+        let check_price = /^[0-9]+.[0-9]+$/
+        btn.addEventListener("click",function(){
+            let code = $("code");
+            let name = $("name");
+            let cost = $("cost");
+            let price = $("price");
+            let des = $("des");
+            if(!code.value.match(check_code)){
+                $("mess-code").innerText = "Product Code is invalid"
+                $("mess-code").classList.add("invalid")
+                code.classList.add("error");
+            }else{
+                code.classList.remove("error");
+                $("mess-code").innerText = "Product Code is valid"
+                $("mess-code").classList.add("valid")
+                $("mess-code").classList.remove("invalid")
+            }
+            if(!name.value.match(check_name)){
+                $("mess-name").innerText = "Product Name is invalid"
+                $("mess-name").classList.add("invalid")
+                name.classList.add("error");
+            }else{
+                name.classList.remove("error");
+                $("mess-name").innerText = "Product Name is valid"
+                $("mess-name").classList.add("valid")
+                $("mess-name").classList.remove("invalid")
+            }
+            if(!cost.value.match(check_price)){
+                cost.classList.add("error");
+                $("mess-cost").innerText = "Product Cost must be a number";
+                $("mess-cost").classList.add("invalid");
+            }else{
+                cost.classList.remove("error");
+                $("mess-cost").innerText = "Product Cost is valid";
+                $("mess-cost").classList.add("valid");
+                $("mess-cost").classList.remove("invalid");
+            }
+            if(!price.value.match(check_price)){
+                price.classList.add("error");
+                $("mess-price").innerText = "Product Price must be a number";
+                $("mess-price").classList.add("invalid");
+            }else{
+                price.classList.remove("error");
+                $("mess-price").innerText = "Product Price is valid";
+                $("mess-price").classList.add("valid");
+                $("mess-price").classList.remove("invalid");
+            }
+            if(des.value == ""){
+                des.classList.add("error");
+                $("mess-des").innerText = "Description must be not blank"
+                $("mess-des").classList.add("invalid");
+            }else{
+                des.classList.remove("error");
+                $("mess-des").innerText = "";
+            }
+        })
+    </script>
+</body>
+</html>
